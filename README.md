@@ -10,7 +10,7 @@
 <br/>
 
 
-> ### The application features the following functions
+> ### The application features the following functionalities
 
 **Login** 
 ```
@@ -20,7 +20,7 @@
 **View Latest Tweets** 
 
 ```
- User can view their latest ten tweets in the slider.
+ User can view their latest ten timeline tweets in the slider.
 ```
 
 **View followers** 
@@ -32,7 +32,7 @@ User can view their 12 random followers under the slider.
 **Download your tweets and followers** 
 
 ```
-User can download their tweets and followers in PDF and XML.
+User can download their tweets and followers in PDF and XML format.
 ```
 
 **Tweet** 
@@ -50,14 +50,8 @@ User can search any user and on selecting the searched user their latest 10 twee
 **Logout** 
 
 ```
-On log out the user will be redirected to authorization page along with destroying all sessions.
+On log out the user will be redirected to authorization page after destroying all sessions.
 ```
-
-## Requirements
-
-- php apache 
-
-- An Editor
 
 
 ## Reference 
@@ -70,7 +64,7 @@ On log out the user will be redirected to authorization page along with destroyi
 ## Notes
 
 ```
-Replace your consumer key, consumer secret key and callback url in the config file. 
+Replace your consumer key, consumer secret key and callback url in the constants.php file. 
 ```
 ## Maintainer
 
