@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "marine-bruin-210417",
+  "private_key_id": "8865926b506eb82ec697cc5bbcf41df9049cf871",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQC2/KzOeEGlq/cK\niUK/ZfoViqdCWqzxRbZnAdj5rVkMVBCGsFyegibPaycVM1iVcqS3kw8RsaI/aGUd\nW/S0JwupP3kTbzJ5XgTqlB8K/90TOTCTWa4HlraE43VRuf6+WyjbmYjkqQj4FieJ\nZRlaeyecZjpi/plrElY8/JewWTMXhT5UO1GzBZ0KG6jkq8NDtwvXsvROG9uOofHu\nbadyB8RnHoRF4c4qcdNL5uaRjAEUVBK+Y7lEWMx7HtGiQy0Ca1vS41ejTGU5zCcU\nKgLhmJYhe+g98GFgWo0xggevEH0Q/szZp3xLpm1dtXPTpAoMrYejlIu/l4LZJ6Na\nCt4fk+UXAgMBAAECggEAEN1Ir961bidjJT1xQWKMod+deqgQuEvMe8HX1Wr8gf5d\nZ4xpfNJR8VvWxkVtLJjcRW7wPJk6cs2URBhtfQz8LiUDa58b78OSgGwWUFU0cska\niPoC6AAj4it0bIvPxotwQIzt6OULRpIEIs2GgKhJBkkFqIn+abfO6t/8uuv9oXUm\nMJxWu7IhVMEanrIDnfkdv+wTZc2xYkIgAzvERDPnWAxvwcf+GgILf3+VK3Xvfr2b\nh2oUhdpbOZ+Bdetc0HsE+lMrAsf/so4qQEwDeWRJzTW0p83IuOAue/ErAjlQL4HQ\nye5PDGtNKDxos/CbmpcBI0Or/R/hyxnz0+SPKBcxAQKBgQDtaaWrJNjJI3tVM9Bc\nl/E2mxb6buXJu9AtpGyvmlb5R5sYUi3k5tKgbVUZ/6IJSGNEV0rb81XakSCxvFWi\nDQ2flVrt3FSwIvO/GJ1jUBtL1uMhqs60L6RSjEGCuiQOKc226QDypiZx4pppxjxE\n8aELRaTQOxIZeG9sRk6rVRklJwKBgQDFUDMCGoPBo2L7M4rxWjHW41sSi2n7cl+9\n9WoaFxcLClSjS99RRlQHveNRW4fZwpHFCO+reb9sfV+lmhw4D9IlIF3NjTKZ2uuH\nlOI/uH4sDOgKJ+GRyD01C6qxkhH32o+sqy3JRsyLxqcJXAPDRlbsgP8FvakPZaWc\njRtZP4eWkQKBgQCC7Gjk+XvnZ/7CnMFB3rSxxVMlpfRojH8gPHWHXVirPZbFEcSn\nX7c1qzVsEfIcpmO/s1ff9dAZqUDbYx3iMMqbf7TWSVQWkh/S+VMKCooTB5zX2ycE\nbOV0dE5INjhd6yW7wcC5D3FSCoHW5PAloQ6LdcuO3ZR8oVLo5djKWTJ1rwKBgGK5\ncPwxdhEyBfl4XaHLJjrFwTCzLtEP9hWesHrjaLUucxDNiqwoyyygdxei+4MaVkNG\n6Fxc60mGJZA/XrUyPUw0OJr7dgEDR2usM9P8JK03u/Yw5C1EClP7RWnZk0H3SoHz\nmFIoKXoaaENHld5j2GQ3WuJtdiRtEIMXG0L5hYbxAoGAbTtmj970Gv8GoGwsk2dD\nGCS0RgKXhxDuJfh9e6FXmAfWX5ol3/IXjGKXEssaGzk23ub5ittKwGPQXeIHybV7\nvNgXPEPp2AGqAqfgqe+zCDZJPDgcr8rSUxV3YFF/2cscHOV2YGmRJnPgbVdTjOjj\nMkyc7ht8f7cPqi6OwHvY14Y=\n-----END PRIVATE KEY-----\n",
+  "client_email": "rt-camp-18@marine-bruin-210417.iam.gserviceaccount.com",
+  "client_id": "100397462656392739170",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://accounts.google.com/o/oauth2/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/rt-camp-18%40marine-bruin-210417.iam.gserviceaccount.com"
+}
