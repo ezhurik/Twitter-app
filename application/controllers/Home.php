@@ -33,6 +33,8 @@ class Home extends CI_Controller {
 				'description'=>$user->description,
 				'followers'=>$user->followers_count,
 				'following'=>$user->friends_count,
+				// 'profilePic'=>$user->profile_image_url_https,
+				// 'bannerImage'=>$user->profile_banner_url,
 				'tweets'=>$user->statuses_count,
 			);
 			$this->session->set_userdata($sessArr);
@@ -66,7 +68,7 @@ class Home extends CI_Controller {
 				}
 				$homeTweetCounter++;		   		
 			}
-		   
+
 		   	//followers
 			$followerList = $connection->get('followers/list', ['screen_name' => $this->session->screenname]);
 			$followers = $followerList->users;
@@ -100,7 +102,7 @@ class Home extends CI_Controller {
 				$followersArr[$followersCounter]['following']=$row->friends_count;
 				$followersCounter++;
 			}
-		   	
+
 			$data['homeTweets']=$homeTweets;
 			$data['followers']=$followersArr;
 			$this->load->view('home',$data);
@@ -267,6 +269,16 @@ class Home extends CI_Controller {
 	{
 		$username=$this->input->post('username');
 		$type=$this->input->post('type');
+		if(!empty($this->input->post('all')))
+		{
+			// die('all');
+			$followers=$this->downloadAllFollowers($username);
+		}
+		else
+		{
+			// die('not all');
+			$followers=$this->getUserFollowers($username);
+		}
 		$followers=$this->getUserFollowers($username);
 		switch ($type) {
 			case "pdf":
@@ -288,13 +300,69 @@ class Home extends CI_Controller {
 
 	public function getUserFollowers($username)
 	{
-		$connection=$this->getConnection();
-		$followers = $connection->get('followers/list', array('screen_name' => $username, 'count' => 200));
 		$followersArr=array();
-		foreach ($followers->users as $row) {
-			$followersArr[]['val']=$row->screen_name;
+		$saveArr=array();
+		$res=$this->model->checkAndRetrieveFollowers($username);
+		if(empty($res))
+		{
+
+			$connection=$this->getConnection();
+			$userDetails = $connection->get('users/lookup', array('screen_name' => $username));
+			$totalFollowers =  $userDetails[0]->followers_count;
+			$forloop=ceil($totalFollowers/200);
+			// $timeTakenInMinutes=(ceil($totalFollowers/2000)*15);
+			// $followersArr=array();
+			if($forloop == 1)
+			{
+				for($i=0;$i<$forloop;$i++)
+				{
+					$followers1 = $connection->get('followers/list', array('screen_name' => $username, 'count' => 200));
+					$followersArr=array();
+					foreach ($followers1->users as $row) {
+						$followersArr[]['val']=$row->screen_name;
+						$saveArr[]=$row->screen_name;
+					}
+				}
+				$implodeVal=implode(',', $saveArr);
+				$this->model->saveFollowers($username,$implodeVal);
+			}
+			else if($forloop <11)
+			{
+				$followers1 = $connection->get('followers/list', array('screen_name' => $username, 'count' => 200));
+				$nc=$followers1->next_cursor;
+				$followersArr=array();
+				foreach ($followers1->users as $row) {
+					$followersArr[]['val']=$row->screen_name;
+					$saveArr[]=$row->screen_name;
+				}
+				for($i=0;$i<$forloop;$i++)
+				{
+					$followers2 = $connection->get('followers/list', array('screen_name' => $username, 'count' => 200,'cursor'=>$nc));
+					$nc= $followers2->next_cursor;	
+					foreach ($followers2->users as $row) {
+						$followersArr[]['val']=$row->screen_name;
+						$saveArr[]=$row->screen_name;
+					}
+				}
+
+				$implodeVal=implode(',', $saveArr);
+				$this->model->saveFollowers($username,$implodeVal);
+			}
+			else
+			{
+				$followersArr[]['val']="More than 2000 followers.";
+			}
 		}
-		return $followersArr;
+		else
+		{
+			$explodearr=(explode(",",$res[0]['followers']));
+			foreach ($explodearr as $row) {
+				$followersArr[]['val']=$row;	
+			}
+		}
+
+		return $followersArr;	
+
 	}
 	
 	public function downloadXml($values,$name)
@@ -341,10 +409,67 @@ class Home extends CI_Controller {
 		exit();
 	}
 
+	public function moreThan2k()
+	{
+		if (!isset($this->session->access_token)) {
+			redirect();
+		}
+		$this->load->view('moreFollowers');
+	}
+
 	public function logout()
 	{
 		session_destroy();
 		redirect('welcome');
+	}
+
+	public function downloadAllFollowers()
+	{
+		$username=$this->input->post('username');
+		$followersArr=array();
+		$saveArr=array();
+		$res=$this->model->checkAndRetrieveFollowers($username);
+		if(empty($res))
+		{
+			$connection=$this->getConnection();
+			$followers1 = $connection->get('users/lookup', array('screen_name' => $username));
+			$totalFollowers =  $followers1[0]->followers_count;
+			$forloop=ceil($totalFollowers/200);
+			$timeTakenInMinutes=(ceil($totalFollowers/2000)*15);
+			
+			$followers1 = $connection->get('followers/list', array('screen_name' => $username, 'count' => 200));
+			$nc=$followers1->next_cursor;
+			$followersArr=array();
+			$sleepCounter=1;
+			foreach ($followers1->users as $row) {
+				$saveArr[]=$row->screen_name;
+				$followersArr[]['val']=$row->screen_name;
+			}
+			for($i=0;$i<$forloop;$i++)
+			{
+				if(($sleepCounter % 10) == 0)
+				{
+					sleep(900);
+				}
+				$followers2 = $connection->get('followers/list', array('screen_name' => $username, 'count' => 200,'cursor'=>$nc));
+				$nc= $followers2->next_cursor;	
+				foreach ($followers2->users as $row) {
+					$saveArr[]=$row->screen_name;
+					$followersArr[]['val']=$row->screen_name;
+				}
+				$sleepCounter++;
+			}
+			$implodeVal=implode(',', $saveArr);
+			$this->model->saveFollowers($username,$implodeVal);
+		}
+		else
+		{
+			$explodearr=(explode(",",$res[0]['followers']));
+			foreach ($explodearr as $row) {
+				$followersArr[]['val']=$row;	
+			}
+		}
+		return $followersArr;
 	}
 
 }
