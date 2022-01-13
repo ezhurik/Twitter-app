@@ -3,10 +3,6 @@
 
 # Twitter Application :+1: :sunglasses:
 
-
-## [Live Demo Link]( https://twitter.lochawala.com/)
-
-<br/>
 <br/>
 
 
